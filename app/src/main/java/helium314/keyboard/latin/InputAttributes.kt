@@ -83,14 +83,6 @@ class InputAttributes(
 
             mDisableGestureFloatingPreviewText = inPrivateImeOptions(mPackageNameForPrivateImeOptions, NO_FLOATING_GESTURE_PREVIEW, editorInfo)
 
-            mInputTypeShouldAutoCorrect = flagAutoCorrect || (flagMultiLine &&
-                    variation != InputType.TYPE_TEXT_VARIATION_WEB_EDIT_TEXT &&
-                    variation != InputType.TYPE_TEXT_VARIATION_URI &&
-                    !InputTypeUtils.isEmailVariation(variation) &&
-                    !flagNoSuggestions)
-
-            mApplicationSpecifiedCompletionOn = flagAutoComplete && isFullscreenMode
-
             mIsGeneralTextInput = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS != variation &&
                     InputType.TYPE_TEXT_VARIATION_PASSWORD != variation &&
                     InputType.TYPE_TEXT_VARIATION_PHONETIC != variation &&
@@ -98,6 +90,13 @@ class InputAttributes(
                     InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD != variation &&
                     InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS != variation &&
                     InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD != variation
+
+            mInputTypeShouldAutoCorrect = flagAutoCorrect || (
+                    mIsGeneralTextInput &&
+                    variation != InputType.TYPE_TEXT_VARIATION_WEB_EDIT_TEXT &&
+                    !flagNoSuggestions)
+
+            mApplicationSpecifiedCompletionOn = flagAutoComplete && isFullscreenMode
 
             mNoLearning = if (AppQuirksManager.isNonIncognitoApp(mTargetApplicationPackageName)) {
                 false

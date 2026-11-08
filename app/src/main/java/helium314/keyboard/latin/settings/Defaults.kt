@@ -85,7 +85,7 @@ object Defaults {
     const val PREF_KEY_PREVIEW_WIDTH_SCALE = 1.0f
     const val PREF_KEY_PREVIEW_HEIGHT_SCALE = 1.0f
     const val PREF_KEY_PREVIEW_RADIUS = 5f
-    const val PREF_AUTO_CORRECTION = false
+    const val PREF_AUTO_CORRECTION = true
     const val PREF_AUTO_CORRECT_AGGRESSIVENESS = 2
     const val PREF_EXPAND_FINE_TUNE_AUTOCORRECT = false
     const val PREF_EXPAND_FINE_TUNE_PREDICTION = false

@@ -127,10 +127,12 @@ android {
             variant.proguardFiles.add(project.layout.buildDirectory.file(getDefaultProguardFile("proguard-android.txt").absolutePath))
             variant.proguardFiles.add(project.layout.buildDirectory.file(project.buildFile.parent + "/proguard-rules.pro"))
         }
-        // Exclude all dictionary assets across all flavors (all downloaded on-demand)
+        // Exclude on-demand dictionary assets across all flavors, preserving bundled dictionaries (uk, en-US)
         val dictsDir = project.file("src/main/assets/dicts")
         if (dictsDir.exists() && dictsDir.isDirectory) {
-            dictsDir.listFiles()?.filter { it.name.endsWith(".dict") }?.sortedBy { it.name }?.forEach { file ->
+            dictsDir.listFiles()?.filter {
+                it.name.endsWith(".dict") && it.name != "main_uk.dict" && it.name != "main_en-US.dict"
+            }?.sortedBy { it.name }?.forEach { file ->
                 patterns.add(file.name)
             }
         }
